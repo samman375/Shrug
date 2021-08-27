@@ -629,7 +629,7 @@ CR (65+) | Subset 0 working; good clear code; good test suite and diary
 PS (55+) | Subset 0 passing some tests; code is reasonably readable; reasonable test suite and diary
 PS (50+) | Good progress on assignment, but not passing autotests
 0% | knowingly providing your work to anyone and it is subsequently submitted (by anyone).
-0 FL for COMP(2041|9044) | submitting any other person's work; this includes joint work.
+0 FL for COMP(2041\|9044) | submitting any other person's work; this includes joint work.
 academic misconduct | submitting another person's work without their consent; paying another person to do work for you.
 
 ***Intermediate Versions of Work***
