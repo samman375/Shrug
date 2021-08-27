@@ -75,6 +75,7 @@ You do not have to use a particular representation to store the repository.
 You do not have to create the same files or directories inside shrug-init as the reference implementation.
 
 ****shrug-add filenames...****
+
 The shrug-add command adds the contents of one or more files to the index.
 
 Files are added to the repository in a two step process. The first step is adding them to the index.
@@ -86,6 +87,7 @@ Only ordinary files in the current directory can be added. You can assume filena
 The shrug-add command, and other Shrug commands, will not be given pathnames with slashes.
 
 ****shrug-commit -m message****
+
 The shrug-commit command saves a copy of all files in the index to the repository.
 
 A message describing the commit must be included as part of the commit command.
@@ -95,9 +97,11 @@ Shrug commits are numbered sequentially: they are not hashes, like Git. You must
 You can assume the commit message is ASCII, does not contain new-line characters, and does not start with a '-' character.
 
 ****shrug-log****
+
 The shrug-log command prints a line for every commit made to the repository: each line should contain the commit number, and the commit message.
 
 ****shrug-show [commit]:filename****
+
 The shrug-show should print the contents of the specified filename as of the specified commit. If commit is omitted, the contents of the file in the index should be printed.
 
 You can assume the commit if specified will be a non-negative integer.
@@ -166,9 +170,11 @@ Note the assessment scheme recognises this difficulty.
 Subset 1 commands must be implemented in POSIX-compatible Shell. See the Permitted Languages section for more information.
 
 ****shrug-commit [-a] -m message****
+
 shrug-commit can have a -a option, which causes all files already in the index to have their contents from the current directory added to the index before the commit.
 
 ****shrug-rm [--force] [--cached] filenames...****
+
 shrug-rm removes a file from the index, or from the current directory and the index.
 
 If the --cached option is specified, the file is removed only from the index, and not from the current directory.
@@ -178,6 +184,7 @@ shrug-rm, like git rm, should stop the user accidentally losing work, and should
 The --force option overrides this, and will carry out the removal even if the user will lose work.
 
 ****shrug-status****
+
 shrug-status shows the status of files in the current directory, the index, and the repository.
 ```
 $ ./shrug-init
@@ -231,14 +238,17 @@ Note the assessment scheme recognises this difficulty.
 Subset 2 commands must be implemented in POSIX-compatible Shell. See the Permitted Languages section for more information.
 
 ****shrug-branch [-d] [branch-name]****
+
 shrug-branch either creates a branch, deletes a branch, or lists current branch names.
 
 ****shrug-checkout branch-name****
+
 shrug-checkout switches branches.
 
 Note that, unlike Git, you can not specify a commit or a file: you can only specify a branch.
 
 ****shrug-merge branch-name|commit -m message****
+
 shrug-merge adds the changes that have been made to the specified branch or commit to the index, and commits them.
 ```
 $ ./shrug-init
@@ -370,6 +380,7 @@ shrug-merge: error: These files can not be merged:
 7.txt
 ```
 **Diary**
+
 You must keep notes on each piece of work you make on this assignment. The notes should include date, starting and finishing time, and a brief description of the work carried out. For example:
 
 Date | Start | Stop | Activity | Comments
@@ -382,6 +393,7 @@ Include these notes in the files you submit as an ASCII file named diary.txt.
 **Testing**
 
 ***Autotests***
+
 As usual, some autotests will be available:
 ```
 2041 autotest shrug shrug-*
@@ -572,6 +584,7 @@ $ 2041 autotest shrug
 **Assessment**
 
 ***Submission***
+
 When you are finished working on the assignment, you must submit your work by running give:
 ```
 $ give cs2041 ass1_shrug shrug-* diary.txt test??.sh [any-other-files]
@@ -591,11 +604,13 @@ Automarking will be run by the lecturer after the submission deadline, using tes
 Manual marking will be done by your tutor, who will mark for style and readability, as described in the Assessment section below. After your tutor has assessed your work, you can view your results here; The resulting mark will also be available via give's web interface.
 
 ***Due Date***
+
 This assignment is tentatively due Sunday July 15 21:59 2020.
 
 If your assignment is submitted after this date, each hour it is late reduces the maximum mark it can achieve by 2%. For example, if an assignment worth 74% was submitted 10 hours late, the late submission would have no effect. If the same assignment was submitted 15 hours late, it would be awarded 70%, the maximum mark it can achieve at that time.
 
 ***Assessment Scheme***
+
 This assignment will contribute 15 marks to your final COMP(2041|9044) mark
 
 15% of the marks for assignment 1 will come from hand-marking. These marks will be awarded on the basis of clarity, commenting, elegance and style: in other words, you will be assessed on how easy it is for a human to read and understand your program.
@@ -618,6 +633,7 @@ PS (50+) | Good progress on assignment, but not passing autotests
 academic misconduct | submitting another person's work without their consent; paying another person to do work for you.
 
 ***Intermediate Versions of Work***
+
 You are required to submit intermediate versions of your assignment.
 
 Every time you work on the assignment and make some progress you should copy your work to your CSE account and submit it using the give command below. It is fine if intermediate versions do not compile or otherwise fail submission tests. Only the final submitted version of your assignment will be marked.
@@ -625,6 +641,7 @@ Every time you work on the assignment and make some progress you should copy you
 All these intermediate versions of your work will be placed in a Git repository and made available to you via a web interface at https://gitlab.cse.unsw.edu.au/z5555555/20T2-comp2041-ass1_shrug (replacing z5555555 with your own zID). This will allow you to retrieve earlier versions of your code if needed.
 
 ***Attribution of Work***
+
 This is an individual assignment.
 
 The work you submit must be entirely your own work, apart from any exceptions explicitly included in the assignment specification above. Submission of work partially or completely derived from any other person or jointly written with any other person is not permitted.
