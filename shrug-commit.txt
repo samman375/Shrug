@@ -1,0 +1,98 @@
+#!/bin/dash
+
+# Assignment 1 COMP2041, by Samuel Thorley (z5257239)
+
+# Shrug-commit
+# Given message, adds index files to new commit repository
+# Only adds if .shrug exists and message provided
+# Files commited only if changes from previous commit have been made
+# Message saved in text file with same name as commit repository, eg. 'commit0.txt' for 'commit0'
+
+if [ ! -d ".shrug" ];
+then
+    echo "shrug-commit: error: no .shrug directory containing shrug repository exists"
+    exit 1
+fi
+
+if [ $1 != "[-a]" -a $1 != "-m" ];
+then
+    echo "usage: shrug-commit [-a] -m commit-message"
+    exit 1;
+fi
+
+if [ $1 = "[-a]" -a $2 != "-m" ] 2>/dev/null
+then
+    echo "usage: shrug-commit [-a] -m commit-message"
+    exit 1;
+fi
+
+if [ $1 = "[-a]" -a $2 = "-m" -a $# -ne 3 ] 2>/dev/null
+then
+    echo "usage: shrug-commit [-a] -m commit-message"
+    exit 1;
+fi
+
+if [ $1 = "-m" -a $# -ne 2 ];
+then
+    echo "usage: shrug-commit [-a] -m commit-message"
+    exit 1;
+fi
+
+if [ ! -d ".shrug/index" ];
+then
+    echo "nothing to commit"
+    exit 1
+fi
+
+if [ ! "$(ls -A .shrug/index)" ];
+then
+    echo "nothing to commit"
+    exit 1
+fi
+
+commit_num=0
+
+while [ -d ".shrug/commit$commit_num" ];
+do
+    commit_num=$((commit_num+1))
+done
+
+if [ $# -eq 2 ];
+then
+    message=$2
+else
+    message=$3
+fi
+
+new_dir=".shrug/commit$commit_num"
+
+mkdir $new_dir
+
+last_dir=$((commit_num-1))
+files_commited=0
+
+for path in ".shrug/index"/*
+do
+    file_name=`echo $path | sed "s/.shrug\/index\///g"`
+    cp "$path" "$new_dir/$file_name"
+done
+
+for path in "$new_dir"/*
+do
+    file_name=`echo $path | sed "s/.shrug\/commit$commit_num\///g"`
+    if [ ! $file_name = "commit$commit_num.txt" ];
+    then
+        cmp --silent ".shrug/commit$last_dir/$file_name" $path || files_commited=$((files_commited+1))
+    fi
+done
+
+if [ $files_commited -eq 0 ];
+then
+    rm -r $new_dir
+    echo "nothing to commit"
+    exit 1
+fi
+
+echo "$message" >"$new_dir/commit$commit_num.txt"
+
+echo "Committed as commit $commit_num"

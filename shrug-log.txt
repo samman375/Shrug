@@ -1,0 +1,35 @@
+#!/bin/dash
+
+# Assignment 1 COMP2041, by Samuel Thorley (z5257239)
+
+# Shrug-log:
+# Prints repository numbers and messages from newest to oldest
+# .shrug and at least 1 commit must exist
+
+if [ ! -d ".shrug" ]
+then
+    echo "shrug-log: error: your repository does not have any commits yet"
+    exit 1
+fi
+
+if [ ! -d ".shrug/commit0" ]
+then
+    echo "shrug-log: error: your repository does not have any commits yet"
+    exit 1
+fi
+
+commit_num=0
+
+while [ -d ".shrug/commit$commit_num" ];
+do
+    commit_num=$((commit_num+1))
+done
+
+commit_num=$((commit_num-1))
+
+while [ $commit_num -ge 0 ]
+do
+    printf "$commit_num "
+    cat ".shrug/commit$commit_num/commit$commit_num.txt"
+    commit_num=$(($commit_num-1))
+done

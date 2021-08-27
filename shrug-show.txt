@@ -1,0 +1,64 @@
+#!/bin/dash
+
+# Assignment 1 COMP2041, by Samuel Thorley (z5257239)
+
+# Shrug-show:
+# Prints contents of file given commit number and file name
+# Prints contents of file in index if only file name given
+# Provided commit number must be valid and file must exist
+
+if [ ! -d ".shrug" ];
+then
+    echo "shrug-show: error: no .shrug directory containing shrug repository exists"
+    exit 1
+fi
+
+if [ $# -eq 0 ];
+then
+    echo "usage: shrug-show <commit>:<filename>"
+    exit 1
+fi
+
+string=`echo "$1" | egrep ":"`
+
+if [ -z $string ];
+then
+    echo "shrug-show: error: invalid object $1"
+    exit 1
+fi
+
+commit_num=`echo $string | cut -d':' -f1`
+file_name=`echo $string | cut -d':' -f2`
+
+# commit number of -1 used to represent index / none provided
+if [ -z `echo $commit_num` ];
+then
+    commit_num=-1
+fi
+
+if [ $commit_num -eq -1 ] 2>/dev/null
+then
+    if [ -f ".shrug/index/$file_name" ];
+    then
+        cat ".shrug/index/$file_name"
+        exit 0
+    else
+        echo "shrug-show: error: '$file_name' not found in index"
+        exit 1
+    fi
+fi
+
+if [ -d .shrug/commit$commit_num ];
+then
+    if [ -f ".shrug/commit$commit_num/$file_name" ];
+    then
+        cat ".shrug/commit$commit_num/$file_name"
+    else
+        echo "shrug-show: error: '$file_name' not found in commit $commit_num"
+        exit 1
+    fi
+else
+    echo "shrug-show: error: unknown commit '$commit_num'"
+    exit 1
+fi 
+
