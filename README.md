@@ -1,0 +1,7 @@
+- Assignment was completed individually in T2 2020 for COMP2041: Software Construction Tools and Techniques.
+- Task was to implement a subset of Git using Shell.
+- This project had a focus on practicing using Shell programming and gaining a clear understanding of Git.
+- Project Spec can be found in spec.md.
+- Commands to run the application can be found in spec.md
+- Only subset 0 and some of subset 1 are implemented.
+- A final mark of 71.6/100 was awarded and was worth 15% of grade.
